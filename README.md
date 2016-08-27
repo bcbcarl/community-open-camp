@@ -13,3 +13,7 @@ Visual Studio Code 適合開發 React，我們可以運用 TypeScript 和 Webpac
 ## 範例程式
 
 https://github.com/bcbcarl/typed-react
+
+## 線上觀看
+
+https://bcbcarl.github.io/community-open-camp/slide.html
