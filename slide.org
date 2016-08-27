@@ -1,0 +1,833 @@
+#+TITLE: Diving into Modern Web Development Toolchain
+#+SUBTITLE: TypeScript, React and Redux
+#+AUTHOR: Carl Su
+#+EMAIL: bcbcarl@gmail.com
+
+#+USE_MATHJAX: false
+
+#+FAVICON: images/coc-icon.jpg
+#+ICON: images/coc-icon.jpg
+#+HASHTAG: Community Open Camp
+
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* About Me
+
+- Docker.Taipei 共同發起人
+- Hacking Thursday 值日生
+- COSCUP 開源工作坊講者
+- PyCon APAC 講者
+- MOPCON 講者
+- 熟悉技能
+  + Linux, Docker, Azure, AWS
+  + Vim, Emacs, VSCode, Git
+  + Clojure, Python, Ramda.js, Lodash
+  + TypeScript, ES2015, React, Redux
+- GitHub: https://github.com/bcbcarl
+
+* Agenda
+
+- Introduction to TypeScript
+- Introduction to React
+- Typed ES2015 React Application
+- From JavaScript to TypeScript
+- Use Redux to manage data flow
+- Use Redux Saga to manage side effects
+
+* TypeScript: JavaScript that Scales
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Introduction to TypeScript
+
+- It is a *typed superset of JavaScript* that compiles to plain
+  JavaScript.
+- It *offers support for the latest and evolving JavaScript features*
+  to help build robust components.
+- It can be used to develop JavaScript apps which runs *on any
+  browser*, *in Node.js*, or *in any JavaScript engine* that supports
+  ECMAScript 3+.
+- It is a *free and open source* programming language.
+- The compiler =tsc= is *written in TypeScript*.
+- It *offers supports for JSX and React*.
+
+http://www.typescriptlang.org
+
+https://github.com/Microsoft/TypeScript
+
+* IDE and Editor Support
+
+#+BEGIN_HTML
+<style>
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.container .item {
+  width: 6em;
+  text-align: center;
+}
+
+.container .item img {
+  width: 3em;
+  height: 3em;
+}
+
+.container .item figcaption {
+  font-size: 0.62em;
+}
+</style>
+
+<div class="container">
+  <figure class="item">
+    <img src="images/visualstudio.svg" alt="Visual Studio" />
+    <figcaption>Visual Studio</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/vscode.svg" alt="Visual Studio Code" />
+    <figcaption>Visual Studio Code</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/sublime-text.svg" alt="Sublime Text" />
+    <figcaption>Sublime Text</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/atom.svg" alt="Atom" />
+    <figcaption>Atom</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/eclipse.svg" alt="Eclipse" />
+    <figcaption>Eclipse</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/emacs.svg" alt="Emacs" />
+    <figcaption>Emacs</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/webstorm.svg" alt="WebStorm" />
+    <figcaption>WebStorm</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/vim.svg" alt="Vim" />
+    <figcaption>Vim</figcaption>
+  </figure>
+</div>
+#+END_HTML
+  
+* Language Features
+
+- Type annotations
+- Compile-time type checking
+- Type inference
+- Type erasure
+- Interfaces
+- Enumerated type
+- Generic
+- Namespaces
+- Tuple
+- Await
+
+* Basic Types (1/2)
+
+#+BEGIN_SRC typescript
+let isDone: boolean = false;  // Boolean
+
+// Number
+let decimal: number = 6;
+let hex: number = 0xf00d;
+let binary: number = 0b1010;
+let octal: number = 0o744;
+
+let fullName: string = `Carl Su`;  // String
+let sentence: string = `Hello, my name is ${fullName}.`;
+
+let list: Array<number> = [1, 2, 3];  // Array
+
+let x: [string, number];  // Tuple
+x = ["hello", 10];
+#+END_SRC
+
+* Basic Types (2/2)
+
+#+BEGIN_SRC typescript
+// Enum
+enum Color { Red = 1, Green = 2, Blue = 4 }
+let c: Color = Color.Green;
+
+// Any
+let notSure: any = 4;
+notSure = "maybe a string instead";
+
+// Void
+const warnUser = (): void =>
+  alert("This is my warning message");
+
+// Type assertions
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+#+END_SRC
+
+* Quick Start
+
+#+BEGIN_SRC bash
+npm install -g tslint typescript
+npm init
+touch index.ts
+tslint --init
+tslint index.ts
+tsc --init
+tsc
+#+END_SRC
+
+#+BEGIN_SRC typescript
+const add10 = (x: number) => x + 10;
+console.log(`add10(3): ${add10(3)}`);
+#+END_SRC
+
+#+BEGIN_SRC javascript
+var add10 = function (x) { return x + 10; };
+console.log("add10(3): " + add10(3));
+#+END_SRC
+
+* TSLint config file
+
+=tslint.json=:
+
+#+BEGIN_SRC json
+{
+  "rules": {
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    ...
+  }
+}
+#+END_SRC
+
+http://palantir.github.io/tslint/usage/tslint-json/
+
+* TypeScript config file
+
+=tsconfig.json=:
+
+#+BEGIN_SRC json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+#+END_SRC
+
+https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+* Integrating with Build Tools
+
+Browserify
+
+#+BEGIN_SRC bash
+npm install tsify
+browserify main.ts -p [ tsify --noImplicitAny ] > bundle.js
+#+END_SRC
+
+webpack
+
+#+BEGIN_SRC bash
+npm install ts-loader --save-dev
+#+END_SRC
+
+https://www.typescriptlang.org/docs/handbook/integrating-with-build-tools.html
+
+* Generate Declarations
+
+=tsc -d= generates corresponding '.d.ts' file.
+
+=index.ts=:
+
+#+BEGIN_SRC typescript
+const add10 = (x: number) => x + 10;
+#+END_SRC
+
+=index.d.ts=:
+
+#+BEGIN_SRC typescript
+declare const add10: (x: number) => number;
+#+END_SRC
+
+* DefinitelyTyped
+
+[[file:images/dt-logo.png]]
+
+http://definitelytyped.org
+
+The repository for high quality TypeScript type definitions.
+
+Get the definitions:
+
+  - GitHub repository
+  - NuGet package manager
+  - TypeScript Definition Manager
+
+* TypeScript Definition Manager
+
+#+BEGIN_SRC bash
+# Search for definitions.
+typings search tape
+
+# Find a definition by name.
+typings search --name react
+
+# Install non-global typings (defaults to "npm" source).
+typings install debug --save
+
+# Install with `--global`.
+typings install dt~mocha --global --save
+
+# Search and install by version.
+typings info env~node --versions
+typings install env~node@6.0 --global --save
+#+END_SRC
+
+* Definition Sources
+
+- =npm= - dependencies from NPM
+- =github= - dependencies directly from GitHub (E.g. Duo, JSPM)
+- =bitbucket= - dependencies directly from Bitbucket
+- =bower= - dependencies from Bower
+- =common= - "standard" libraries without a known "source"
+- =shared= - shared library functionality
+- =lib= - shared environment functionality (mirror of =shared=) (=--global=)
+- =env= - environments (E.g. =atom=, =electron=) (=--global=)
+- =global= - global (=window.<var>=) libraries (=--global=)
+- =dt= - typings from DefinitelyTyped (usually =--global=)
+
+* The Future of Declaration Files
+  
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 400px
+[[file:images/typesearch.png]]
+#+END_CENTER
+
+* React: JavaScript UI library
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* React: Declarative
+  :PROPERTIES:
+  :ARTICLE: larger
+  :END:
+
+React makes it painless to create interactive UIs.
+
+Design simple views for each state in your application, and React will
+efficiently update and render just the right components when your data
+changes.
+
+Declarative views make your code more predictable, simpler to
+understand, and easier to debug.
+
+* React: Component-Based
+  :PROPERTIES:
+  :ARTICLE: larger
+  :END:
+
+Build encapsulated components that manage their own state, then compose
+them to make complex UIs.
+
+Since component logic is written in JavaScript instead of templates,
+you can easily pass rich data through your app and keep state out of
+the DOM.
+
+* React: Learn Once, Write Anywhere
+  :PROPERTIES:
+  :ARTICLE: larger
+  :END:
+
+We don't make assumptions about the rest of your technology stack, so
+you can develop new features in React without rewriting existing code.
+
+React can also render on the server using Node and power mobile apps
+using React Native.
+
+* Introduction to JSX
+
+JSX is a JavaScript syntax extension that looks similar to XML.
+
+You can use a simple JSX syntactic transform with React.
+
+#+BEGIN_SRC javascript
+var Nav;
+
+// Input (JSX):
+var app = <Nav color="blue" />;
+
+// Output (JS):
+var app = React.createElement(Nav, {color:"blue"});
+#+END_SRC
+
+https://facebook.github.io/react/docs/jsx-in-depth.html
+
+* React Toolbox
+
+A set of React components implementing Google's Material Design
+specification with the power of CSS Modules.
+
+#+BEGIN_SRC javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Button } from 'react-toolbox/lib/button';
+
+ReactDOM.render(
+  <Button label="Hello World!" />,
+  document.getElementById('app')
+);
+#+END_SRC
+
+http://www.react-toolbox.com/
+
+* CSS Modules (1/2)
+
+#+BEGIN_SRC javascript
+import React from 'react';
+<b>import styles from './table.css';</b>
+export default class Table extends React.Component {
+  render () {
+    return <div className=<b>{styles.table}</b>>
+      <div className=<b>{styles.row}</b>>
+        <div className=<b>{styles.cell}</b>>A0</div>
+        <div className=<b>{styles.cell}</b>>B0</div>
+      </div>
+    </div>;
+  }
+}
+#+END_SRC
+
+https://github.com/css-modules/css-modules
+
+* CSS Modules (2/2)
+
+#+BEGIN_SRC javascript
+<div class="table__table___32osj">
+    <div class="table__row___2w27N">
+        <div class="table__cell___1oVw5">A0</div>
+        <div class="table__cell___1oVw5">B0</div>
+    </div>
+</div>
+#+END_SRC
+
+- You have to use =camelCase= CSS class names.
+- You have to use =styles= object whenever constructing a className.
+- Mixing CSS Modules and global CSS classes is cumbersome.
+- Reference to an undefined CSS Module resolves to undefined without a warning.
+
+* React CSS Modules
+
+Seamless mapping of class names to CSS modules inside of React components.
+
+- You are not forced to use the =camelCase= naming convention.
+- You do not need to refer to the =styles= object every time you use a
+  CSS Module.
+- There is clear distinction between global CSS and CSS Modules.
+
+#+BEGIN_SRC javascript
+<div className='global-css' styleName='local-module'></div>
+#+END_SRC
+
+https://github.com/gajus/react-css-modules
+
+* Typed CSS Modules
+
+#+BEGIN_SRC typescript
+/* styles.css */
+@value primary: red;
+.myClass { color: primary; }
+#+END_SRC
+
+#+BEGIN_SRC typescript
+/* styles.css.d.ts */
+export const primary: string;
+export const myClass: string;
+#+END_SRC
+
+#+BEGIN_SRC typescript
+/* app.ts */
+import * as styles from './styles.css';
+console.log(`<div class="${styles.myClass}"></div>`);
+console.log(`<div style="color: ${styles.primary}"></div>`);
+#+END_SRC
+
+https://github.com/Quramy/typed-css-modules
+
+* React Developer Tools (Google Chrome)
+
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 420px
+[[file:images/react-devtools.png]]
+#+END_CENTER
+
+* React Developer Tools (Mozilla Firefox)
+
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 300px
+[[file:images/react-devtools-fx.png]]
+#+END_CENTER
+
+* Hello from TypeScript and React!
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Typed ES2015 React Application
+
+#+BEGIN_SRC typescript
+import * as React from "react";
+<b>export interface HelloProps { compiler: string; framework: string; }</b>
+export class Hello extends React.Component<b><HelloProps, {}></b> {
+  render() {
+    return <h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>;
+  }
+}
+#+END_SRC
+
+#+BEGIN_SRC javascript
+import * as React from "react";
+export class Hello extends React.Component {
+  render() {
+    return <b>React.createElement</b>(
+      "h1", null, "Hello from ", this.props.compiler, " and ",
+      this.props.framework, "!");
+  }
+}
+#+END_SRC
+
+* From JavaScript to TypeScript
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Migrating From JavaScript (1/2)
+
+Migrating from JavaScript to TypeScript:
+
+- Add TypeScript config file.
+- Change file extension from =.jsx?= to =.tsx?=.
+- Supress errors using =any=.
+- Write new code and make as little use of =any= as possible.
+- Use ambient definitions for third party JavaScript code.
+- Declare missing modules (e.g.: =declare module "humps";=).
+- Declare non-js resources (e.g.: =declare module "*.css";=).
+
+https://basarat.gitbooks.io/typescript/content/docs/types/migrating.html
+
+* Migrating From JavaScript (2/2)
+
+Including =.jsx?= files with =--allowJs=:
+
+=tsconfig.json=:
+
+#+BEGIN_SRC json
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es2015",
+    <b>"allowJs": true,</b>
+  }
+}
+#+END_SRC
+
+https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88
+
+* Redux: Predictable State Container
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Motivation
+
+Our code must manage more state than ever before.
+
+This complexity is difficult to handle as *we're mixing two concepts*
+that are very hard for the human mind to reason about: *mutation and
+asynchronicity*.
+
+*Redux attempts to make state mutations predictable* by imposing certain
+restrictions on how and when updates can happen.
+
+These restrictions are reflected in the *three principles* of Redux.
+
+http://redux.js.org/docs/introduction/Motivation.html
+
+* Three Principles
+  :PROPERTIES:
+  :ARTICLE: large
+  :END:
+
+Redux can be described in three fundamental principles:
+
+- Single source of truth
+- State is read-only
+- Changes are made with pure functions
+
+* Single source of truth
+
+The state of your whole application is stored in an object tree within a single store.
+
+#+BEGIN_SRC javascript
+console.log(store.getState());
+#+END_SRC
+#+BEGIN_SRC javascript
+{
+  visibilityFilter: 'SHOW_ALL',
+  todos: [{
+    text: 'Consider using Redux',
+    completed: true,
+  }, {
+    text: 'Keep all state in a single tree',
+    completed: false
+  }]
+}
+#+END_SRC
+
+* State is read-only
+
+The only way to change the state is to emit an action, an object describing what happened.
+
+#+BEGIN_SRC javascript
+store.dispatch({
+  type: 'COMPLETE_TODO',
+  index: 1
+})
+
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
+})
+#+END_SRC
+
+* Changes are made with pure functions
+
+To specify how the state tree is transformed by actions, you write pure reducers.
+
+#+BEGIN_SRC javascript
+export const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO': return state;
+    case 'COMPLETE_TODO': return state;
+    default: return state;
+  }
+}
+#+END_SRC
+
+#+BEGIN_SRC javascript
+import { combineReducers, createStore } from 'redux';
+import { visibilityFilter, todos } from './reducers';
+let reducer = combineReducers({ visibilityFilter, todos });
+let store = createStore(reducer);
+#+END_SRC
+
+* Glossary
+
+- State
+- Action
+- Reducer
+- Dispatching Function
+- Action Creator
+- Async Action
+- Middleware
+- Store
+
+http://redux.js.org/docs/Glossary.html
+
+* Redux DevTools
+
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 300px
+[[file:images/redux-devtools.png]]
+#+END_CENTER
+
+https://github.com/gaearon/redux-devtools
+
+* When should I use Redux?
+
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 320px
+[[file:images/dont-use-redux.png]]
+#+END_CENTER
+
+https://twitter.com/dan_abramov/status/699241546248536064
+
+* redux-saga: Side Effect Manager
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* redux-saga: Hello Sagas!
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Hello Sagas! (1/2)
+  :PROPERTIES:
+  :ARTICLE: larger
+  :END:
+
+We will write our 'Hello, world' version for Sagas.
+
+Create a file =sagas.ts= then add the following snippet:
+
+#+BEGIN_SRC typescript
+export function* helloSaga():
+ IterableIterator<void> {
+  console.log("Hello Sagas!");
+}
+#+END_SRC
+
+https://yelouafi.github.io/redux-saga/docs/introduction/BeginnerTutorial.html
+
+* Hello Sagas! (2/2)
+
+In order to run our Saga, we need to:
+
+- create a Saga middleware with a list of Sagas to run
+- connect the Saga middleware to the Redux store
+
+We will make the changes to =main.tsx=:
+
+#+BEGIN_SRC typescript
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { helloSaga } from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(helloSaga);
+#+END_SRC
+
+* redux-saga: Making Async Calls
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Making Asynchronous Calls (1/5)
+:PROPERTIES:
+:ARTICLE: smaller
+:END:
+
+We'll provide an additional callback =onIncrementAsync= to the UI component =Counter.tsx=:
+
+#+BEGIN_SRC typescript
+interface CounterProps {
+  value: number;
+  onIncrement(): { type: string };
+  onDecrement(): { type: string };
+  onIncrementAsync(): { type: string };
+}
+
+const Counter = ({value, onIncrement, onDecrement, onIncrementAsync}: CounterProps) =>
+  <div>
+    {" "}
+    <button onClick={onIncrementAsync}>Increment after 1 second</button>
+    <hr />
+    <div>Clicked: {value} times</div>
+  </div>
+#+END_SRC
+
+* Making Asynchronous Calls (2/5)
+
+We should connect the =onIncrementAsync= of the Component to a Store action.
+
+We will modify the =main.tsx= module as follows:
+
+#+BEGIN_SRC typescript
+function render() {
+  ReactDOM.render(
+    <Counter
+      onIncrementAsync={() => action("INCREMENT_ASYNC")}
+    />,
+    document.getElementById("root")
+  );
+}
+#+END_SRC
+
+* Making Asynchronous Calls (3/5)
+
+Add the following code to the =sagas.ts= module:
+
+#+BEGIN_SRC typescript
+import { takeEvery, delay } from "redux-saga";
+import { call, put, Effect } from "redux-saga/effects";
+
+// Our worker Saga: will perform the async increment task
+export function* incrementAsync(): IterableIterator<Effect> {
+  yield call(delay, 1000);
+  yield put({ type: "INCREMENT" });
+}
+
+// Our watcher Saga: spawn a new task on each INCREMENT_ASYNC
+export function* watchIncrementAsync() {
+  yield* takeEvery("INCREMENT_ASYNC", incrementAsync);
+}
+#+END_SRC
+
+* Making Asynchronous Calls (4/5)
+
+Now we have 2 Sagas, and we need to start them both at once.
+
+To do that, we'll add a =rootSaga= that is responsible for starting our
+other Sagas.
+
+In the same file =sagas.ts=, add the following code:
+
+#+BEGIN_SRC typescript
+// single entry point to start all Sagas at once
+export default function* rootSaga() {
+  yield [
+    helloSaga(),
+    watchIncrementAsync()
+  ];
+}
+#+END_SRC
+
+* Making Asynchronous Calls (5/5)
+
+This Saga yields an array with the results of calling our two sagas,
+=helloSaga= and =watchIncrementAsync=.
+
+Now we only have to invoke =sagaMiddleware.run= on the root Saga in =main.tsx=:
+
+#+BEGIN_SRC typescript
+import rootSaga from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(...);
+sagaMiddleware.run(rootSaga);
+#+END_SRC
+

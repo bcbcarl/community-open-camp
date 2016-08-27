@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2016-08-27 Sat 15:34 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="Carl Su" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/coc-icon.jpg"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">About Me</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Docker.Taipei 共同發起人</li>
+<li>Hacking Thursday 值日生</li>
+<li>COSCUP 開源工作坊講者</li>
+<li>PyCon APAC 講者</li>
+<li>MOPCON 講者</li>
+<li>熟悉技能
+<ul>
+<li>Linux, Docker, Azure, AWS</li>
+<li>Vim, Emacs, VSCode, Git</li>
+<li>Clojure, Python, Ramda.js, Lodash</li>
+<li>TypeScript, ES2015, React, Redux</li>
+</ul></li>
+<li>GitHub: <a href="https://github.com/bcbcarl">https://github.com/bcbcarl</a></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Agenda</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Introduction to TypeScript</li>
+<li>Introduction to React</li>
+<li>Typed ES2015 React Application</li>
+<li>From JavaScript to TypeScript</li>
+<li>Use Redux to manage data flow</li>
+<li>Use Redux Saga to manage side effects</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">TypeScript: JavaScript that Scales</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Introduction to TypeScript</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>It is a <b>typed superset of JavaScript</b> that compiles to plain
+JavaScript.</li>
+<li>It <b>offers support for the latest and evolving JavaScript features</b>
+  to help build robust components.</li>
+<li>It can be used to develop JavaScript apps which runs <b>on any
+browser</b>, <b>in Node.js</b>, or <b>in any JavaScript engine</b> that supports
+ECMAScript 3+.</li>
+<li>It is a <b>free and open source</b> programming language.</li>
+<li>The compiler <code>tsc</code> is <b>written in TypeScript</b>.</li>
+<li>It <b>offers supports for JSX and React</b>.</li>
+</ul>
+
+<p>
+<a href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
+</p>
+
+<p>
+<a href="https://github.com/Microsoft/TypeScript">https://github.com/Microsoft/TypeScript</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">IDE and Editor Support</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<style>
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.container .item {
+  width: 6em;
+  text-align: center;
+}
+
+.container .item img {
+  width: 3em;
+  height: 3em;
+}
+
+.container .item figcaption {
+  font-size: 0.62em;
+}
+</style>
+
+<div class="container">
+  <figure class="item">
+    <img src="images/visualstudio.svg" alt="Visual Studio" />
+    <figcaption>Visual Studio</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/vscode.svg" alt="Visual Studio Code" />
+    <figcaption>Visual Studio Code</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/sublime-text.svg" alt="Sublime Text" />
+    <figcaption>Sublime Text</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/atom.svg" alt="Atom" />
+    <figcaption>Atom</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/eclipse.svg" alt="Eclipse" />
+    <figcaption>Eclipse</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/emacs.svg" alt="Emacs" />
+    <figcaption>Emacs</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/webstorm.svg" alt="WebStorm" />
+    <figcaption>WebStorm</figcaption>
+  </figure>
+  <figure class="item">
+    <img src="images/vim.svg" alt="Vim" />
+    <figcaption>Vim</figcaption>
+  </figure>
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Language Features</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Type annotations</li>
+<li>Compile-time type checking</li>
+<li>Type inference</li>
+<li>Type erasure</li>
+<li>Interfaces</li>
+<li>Enumerated type</li>
+<li>Generic</li>
+<li>Namespaces</li>
+<li>Tuple</li>
+<li>Await</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Basic Types (1/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+let isDone: boolean = false;  // Boolean
+
+// Number
+let decimal: number = 6;
+let hex: number = 0xf00d;
+let binary: number = 0b1010;
+let octal: number = 0o744;
+
+let fullName: string = `Carl Su`;  // String
+let sentence: string = `Hello, my name is ${fullName}.`;
+
+let list: Array&lt;number&gt; = [1, 2, 3];  // Array
+
+let x: [string, number];  // Tuple
+x = ["hello", 10];
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Basic Types (2/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+// Enum
+enum Color { Red = 1, Green = 2, Blue = 4 }
+let c: Color = Color.Green;
+
+// Any
+let notSure: any = 4;
+notSure = "maybe a string instead";
+
+// Void
+const warnUser = (): void =&gt;
+  alert("This is my warning message");
+
+// Type assertions
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">Quick Start</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="bash">
+npm install -g tslint typescript
+npm init
+touch index.ts
+tslint --init
+tslint index.ts
+tsc --init
+tsc
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+const add10 = (x: number) =&gt; x + 10;
+console.log(`add10(3): ${add10(3)}`);
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+var add10 = function (x) { return x + 10; };
+console.log("add10(3): " + add10(3));
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">TSLint config file</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<code>tslint.json</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="json">
+{
+  "rules": {
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    ...
+  }
+}
+</pre>
+
+</div>
+
+<p>
+<a href="http://palantir.github.io/tslint/usage/tslint-json/">http://palantir.github.io/tslint/usage/tslint-json/</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">TypeScript config file</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<code>tsconfig.json</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="json">
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+</pre>
+
+</div>
+
+<p>
+<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">https://www.typescriptlang.org/docs/handbook/tsconfig-json.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">Integrating with Build Tools</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Browserify
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="bash">
+npm install tsify
+browserify main.ts -p [ tsify --noImplicitAny ] &gt; bundle.js
+</pre>
+
+</div>
+
+<p>
+webpack
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="bash">
+npm install ts-loader --save-dev
+</pre>
+
+</div>
+
+<p>
+<a href="https://www.typescriptlang.org/docs/handbook/integrating-with-build-tools.html">https://www.typescriptlang.org/docs/handbook/integrating-with-build-tools.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">Generate Declarations</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<code>tsc -d</code> generates corresponding '.d.ts' file.
+</p>
+
+<p>
+<code>index.ts</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+const add10 = (x: number) =&gt; x + 10;
+</pre>
+
+</div>
+
+<p>
+<code>index.d.ts</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+declare const add10: (x: number) =&gt; number;
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">DefinitelyTyped</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+
+<div class="figure">
+<p><img src="images/dt-logo.png" alt="dt-logo.png" />
+</p>
+</div>
+
+<p>
+<a href="http://definitelytyped.org/">http://definitelytyped.org/</a>
+</p>
+
+<p>
+The repository for high quality TypeScript type definitions.
+</p>
+
+<p>
+Get the definitions:
+</p>
+
+<ul>
+<li>GitHub repository</li>
+<li>NuGet package manager</li>
+<li>TypeScript Definition Manager</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">TypeScript Definition Manager</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="bash">
+# Search for definitions.
+typings search tape
+
+# Find a definition by name.
+typings search --name react
+
+# Install non-global typings (defaults to "npm" source).
+typings install debug --save
+
+# Install with `--global`.
+typings install dt~mocha --global --save
+
+# Search and install by version.
+typings info env~node --versions
+typings install env~node@6.0 --global --save
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16">Definition Sources</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li><code>npm</code> - dependencies from NPM</li>
+<li><code>github</code> - dependencies directly from GitHub (E.g. Duo, JSPM)</li>
+<li><code>bitbucket</code> - dependencies directly from Bitbucket</li>
+<li><code>bower</code> - dependencies from Bower</li>
+<li><code>common</code> - "standard" libraries without a known "source"</li>
+<li><code>shared</code> - shared library functionality</li>
+<li><code>lib</code> - shared environment functionality (mirror of <code>shared</code>) (<code>--global</code>)</li>
+<li><code>env</code> - environments (E.g. <code>atom</code>, <code>electron</code>) (<code>--global</code>)</li>
+<li><code>global</code> - global (<code>window.&lt;var&gt;</code>) libraries (<code>--global</code>)</li>
+<li><code>dt</code> - typings from DefinitelyTyped (usually <code>--global</code>)</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17">The Future of Declaration Files</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/typesearch.png" alt="typesearch.png" height="400px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">React: JavaScript UI library</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">React: Declarative</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="larger" id="text-">
+<p>
+React makes it painless to create interactive UIs.
+</p>
+
+<p>
+Design simple views for each state in your application, and React will
+efficiently update and render just the right components when your data
+changes.
+</p>
+
+<p>
+Declarative views make your code more predictable, simpler to
+understand, and easier to debug.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">React: Component-Based</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="larger" id="text-">
+<p>
+Build encapsulated components that manage their own state, then compose
+them to make complex UIs.
+</p>
+
+<p>
+Since component logic is written in JavaScript instead of templates,
+you can easily pass rich data through your app and keep state out of
+the DOM.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21">React: Learn Once, Write Anywhere</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="larger" id="text-">
+<p>
+We don't make assumptions about the rest of your technology stack, so
+you can develop new features in React without rewriting existing code.
+</p>
+
+<p>
+React can also render on the server using Node and power mobile apps
+using React Native.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline22" class="outline-2">
+<h2 id="orgheadline22">Introduction to JSX</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+JSX is a JavaScript syntax extension that looks similar to XML.
+</p>
+
+<p>
+You can use a simple JSX syntactic transform with React.
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+var Nav;
+
+// Input (JSX):
+var app = &lt;Nav color="blue" /&gt;;
+
+// Output (JS):
+var app = React.createElement(Nav, {color:"blue"});
+</pre>
+
+</div>
+
+<p>
+<a href="https://facebook.github.io/react/docs/jsx-in-depth.html">https://facebook.github.io/react/docs/jsx-in-depth.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23">React Toolbox</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+A set of React components implementing Google's Material Design
+specification with the power of CSS Modules.
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Button } from 'react-toolbox/lib/button';
+
+ReactDOM.render(
+  &lt;Button label="Hello World!" /&gt;,
+  document.getElementById('app')
+);
+</pre>
+
+</div>
+
+<p>
+<a href="http://www.react-toolbox.com/">http://www.react-toolbox.com/</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline24" class="outline-2">
+<h2 id="orgheadline24">CSS Modules (1/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+import React from 'react';
+<b>import styles from './table.css';</b>
+export default class Table extends React.Component {
+  render () {
+    return &lt;div className=<b>{styles.table}</b>&gt;
+      &lt;div className=<b>{styles.row}</b>&gt;
+        &lt;div className=<b>{styles.cell}</b>&gt;A0&lt;/div&gt;
+        &lt;div className=<b>{styles.cell}</b>&gt;B0&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;;
+  }
+}
+</pre>
+
+</div>
+
+<p>
+<a href="https://github.com/css-modules/css-modules">https://github.com/css-modules/css-modules</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline25" class="outline-2">
+<h2 id="orgheadline25">CSS Modules (2/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+&lt;div class="table__table___32osj"&gt;
+    &lt;div class="table__row___2w27N"&gt;
+        &lt;div class="table__cell___1oVw5"&gt;A0&lt;/div&gt;
+        &lt;div class="table__cell___1oVw5"&gt;B0&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+</div>
+
+<ul>
+<li>You have to use <code>camelCase</code> CSS class names.</li>
+<li>You have to use <code>styles</code> object whenever constructing a className.</li>
+<li>Mixing CSS Modules and global CSS classes is cumbersome.</li>
+<li>Reference to an undefined CSS Module resolves to undefined without a warning.</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline26" class="outline-2">
+<h2 id="orgheadline26">React CSS Modules</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Seamless mapping of class names to CSS modules inside of React components.
+</p>
+
+<ul>
+<li>You are not forced to use the <code>camelCase</code> naming convention.</li>
+<li>You do not need to refer to the <code>styles</code> object every time you use a
+CSS Module.</li>
+<li>There is clear distinction between global CSS and CSS Modules.</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+&lt;div className='global-css' styleName='local-module'&gt;&lt;/div&gt;
+</pre>
+
+</div>
+
+<p>
+<a href="https://github.com/gajus/react-css-modules">https://github.com/gajus/react-css-modules</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline27" class="outline-2">
+<h2 id="orgheadline27">Typed CSS Modules</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+/* styles.css */
+@value primary: red;
+.myClass { color: primary; }
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+/* styles.css.d.ts */
+export const primary: string;
+export const myClass: string;
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+/* app.ts */
+import * as styles from './styles.css';
+console.log(`&lt;div class="${styles.myClass}"&gt;&lt;/div&gt;`);
+console.log(`&lt;div style="color: ${styles.primary}"&gt;&lt;/div&gt;`);
+</pre>
+
+</div>
+
+<p>
+<a href="https://github.com/Quramy/typed-css-modules">https://github.com/Quramy/typed-css-modules</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline28" class="outline-2">
+<h2 id="orgheadline28">React Developer Tools (Google Chrome)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/react-devtools.png" alt="react-devtools.png" height="420px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline29" class="outline-2">
+<h2 id="orgheadline29">React Developer Tools (Mozilla Firefox)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/react-devtools-fx.png" alt="react-devtools-fx.png" height="300px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline30" class="outline-2">
+<h2 id="orgheadline30">Hello from TypeScript and React!</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline31" class="outline-2">
+<h2 id="orgheadline31">Typed ES2015 React Application</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+import * as React from "react";
+<b>export interface HelloProps { compiler: string; framework: string; }</b>
+export class Hello extends React.Component<b>&lt;HelloProps, {}&gt;</b> {
+  render() {
+    return &lt;h1&gt;Hello from {this.props.compiler} and {this.props.framework}!&lt;/h1&gt;;
+  }
+}
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+import * as React from "react";
+export class Hello extends React.Component {
+  render() {
+    return <b>React.createElement</b>(
+      "h1", null, "Hello from ", this.props.compiler, " and ",
+      this.props.framework, "!");
+  }
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline32" class="outline-2">
+<h2 id="orgheadline32">From JavaScript to TypeScript</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline33" class="outline-2">
+<h2 id="orgheadline33">Migrating From JavaScript (1/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Migrating from JavaScript to TypeScript:
+</p>
+
+<ul>
+<li>Add TypeScript config file.</li>
+<li>Change file extension from <code>.jsx?</code> to <code>.tsx?</code>.</li>
+<li>Supress errors using <code>any</code>.</li>
+<li>Write new code and make as little use of <code>any</code> as possible.</li>
+<li>Use ambient definitions for third party JavaScript code.</li>
+<li>Declare missing modules (e.g.: <code>declare module "humps";</code>).</li>
+<li>Declare non-js resources (e.g.: <code>declare module "*.css";</code>).</li>
+</ul>
+
+<p>
+<a href="https://basarat.gitbooks.io/typescript/content/docs/types/migrating.html">https://basarat.gitbooks.io/typescript/content/docs/types/migrating.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34">Migrating From JavaScript (2/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Including <code>.jsx?</code> files with <code>--allowJs</code>:
+</p>
+
+<p>
+<code>tsconfig.json</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="json">
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es2015",
+    <b>"allowJs": true,</b>
+  }
+}
+</pre>
+
+</div>
+
+<p>
+<a href="https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88">https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline35" class="outline-2">
+<h2 id="orgheadline35">Redux: Predictable State Container</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline36" class="outline-2">
+<h2 id="orgheadline36">Motivation</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Our code must manage more state than ever before.
+</p>
+
+<p>
+This complexity is difficult to handle as <b>we're mixing two concepts</b>
+that are very hard for the human mind to reason about: <b>mutation and
+asynchronicity</b>.
+</p>
+
+<p>
+<b>Redux attempts to make state mutations predictable</b> by imposing certain
+restrictions on how and when updates can happen.
+</p>
+
+<p>
+These restrictions are reflected in the <b>three principles</b> of Redux.
+</p>
+
+<p>
+<a href="http://redux.js.org/docs/introduction/Motivation.html">http://redux.js.org/docs/introduction/Motivation.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline37" class="outline-2">
+<h2 id="orgheadline37">Three Principles</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="large" id="text-">
+<p>
+Redux can be described in three fundamental principles:
+</p>
+
+<ul>
+<li>Single source of truth</li>
+<li>State is read-only</li>
+<li>Changes are made with pure functions</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline38" class="outline-2">
+<h2 id="orgheadline38">Single source of truth</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+The state of your whole application is stored in an object tree within a single store.
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+console.log(store.getState());
+</pre>
+
+</div>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+{
+  visibilityFilter: 'SHOW_ALL',
+  todos: [{
+    text: 'Consider using Redux',
+    completed: true,
+  }, {
+    text: 'Keep all state in a single tree',
+    completed: false
+  }]
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline39" class="outline-2">
+<h2 id="orgheadline39">State is read-only</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+The only way to change the state is to emit an action, an object describing what happened.
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+store.dispatch({
+  type: 'COMPLETE_TODO',
+  index: 1
+})
+
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
+})
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline40" class="outline-2">
+<h2 id="orgheadline40">Changes are made with pure functions</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+To specify how the state tree is transformed by actions, you write pure reducers.
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+export const todos = (state = [], action) =&gt; {
+  switch (action.type) {
+    case 'ADD_TODO': return state;
+    case 'COMPLETE_TODO': return state;
+    default: return state;
+  }
+}
+</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="javascript">
+import { combineReducers, createStore } from 'redux';
+import { visibilityFilter, todos } from './reducers';
+let reducer = combineReducers({ visibilityFilter, todos });
+let store = createStore(reducer);
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline41" class="outline-2">
+<h2 id="orgheadline41">Glossary</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>State</li>
+<li>Action</li>
+<li>Reducer</li>
+<li>Dispatching Function</li>
+<li>Action Creator</li>
+<li>Async Action</li>
+<li>Middleware</li>
+<li>Store</li>
+</ul>
+
+<p>
+<a href="http://redux.js.org/docs/Glossary.html">http://redux.js.org/docs/Glossary.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42">Redux DevTools</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/redux-devtools.png" alt="redux-devtools.png" height="300px" />
+</p>
+</div>
+</article>
+
+<p>
+<a href="https://github.com/gaearon/redux-devtools">https://github.com/gaearon/redux-devtools</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline43" class="outline-2">
+<h2 id="orgheadline43">When should I use Redux?</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/dont-use-redux.png" alt="dont-use-redux.png" height="320px" />
+</p>
+</div>
+</article>
+
+<p>
+<a href="https://twitter.com/dan_abramov/status/699241546248536064">https://twitter.com/dan_abramov/status/699241546248536064</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline44" class="outline-2">
+<h2 id="orgheadline44">redux-saga: Side Effect Manager</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline45" class="outline-2">
+<h2 id="orgheadline45">redux-saga: Hello Sagas!</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline46" class="outline-2">
+<h2 id="orgheadline46">Hello Sagas! (1/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="larger" id="text-">
+<p>
+We will write our 'Hello, world' version for Sagas.
+</p>
+
+<p>
+Create a file <code>sagas.ts</code> then add the following snippet:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+export function* helloSaga():
+ IterableIterator&lt;void&gt; {
+  console.log("Hello Sagas!");
+}
+</pre>
+
+</div>
+
+<p>
+<a href="https://yelouafi.github.io/redux-saga/docs/introduction/BeginnerTutorial.html">https://yelouafi.github.io/redux-saga/docs/introduction/BeginnerTutorial.html</a>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline47" class="outline-2">
+<h2 id="orgheadline47">Hello Sagas! (2/2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+In order to run our Saga, we need to:
+</p>
+
+<ul>
+<li>create a Saga middleware with a list of Sagas to run</li>
+<li>connect the Saga middleware to the Redux store</li>
+</ul>
+
+<p>
+We will make the changes to <code>main.tsx</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { helloSaga } from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(helloSaga);
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/coc-icon.jpg"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline48" class="outline-2">
+<h2 id="orgheadline48">redux-saga: Making Async Calls</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline49" class="outline-2">
+<h2 id="orgheadline49">Making Asynchronous Calls (1/5)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<p>
+We'll provide an additional callback <code>onIncrementAsync</code> to the UI component <code>Counter.tsx</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+interface CounterProps {
+  value: number;
+  onIncrement(): { type: string };
+  onDecrement(): { type: string };
+  onIncrementAsync(): { type: string };
+}
+
+const Counter = ({value, onIncrement, onDecrement, onIncrementAsync}: CounterProps) =&gt;
+  &lt;div&gt;
+    {" "}
+    &lt;button onClick={onIncrementAsync}&gt;Increment after 1 second&lt;/button&gt;
+    &lt;hr /&gt;
+    &lt;div&gt;Clicked: {value} times&lt;/div&gt;
+  &lt;/div&gt;
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline50" class="outline-2">
+<h2 id="orgheadline50">Making Asynchronous Calls (2/5)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+We should connect the <code>onIncrementAsync</code> of the Component to a Store action.
+</p>
+
+<p>
+We will modify the <code>main.tsx</code> module as follows:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+function render() {
+  ReactDOM.render(
+    &lt;Counter
+      onIncrementAsync={() =&gt; action("INCREMENT_ASYNC")}
+    /&gt;,
+    document.getElementById("root")
+  );
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline51" class="outline-2">
+<h2 id="orgheadline51">Making Asynchronous Calls (3/5)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Add the following code to the <code>sagas.ts</code> module:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+import { takeEvery, delay } from "redux-saga";
+import { call, put, Effect } from "redux-saga/effects";
+
+// Our worker Saga: will perform the async increment task
+export function* incrementAsync(): IterableIterator&lt;Effect&gt; {
+  yield call(delay, 1000);
+  yield put({ type: "INCREMENT" });
+}
+
+// Our watcher Saga: spawn a new task on each INCREMENT_ASYNC
+export function* watchIncrementAsync() {
+  yield* takeEvery("INCREMENT_ASYNC", incrementAsync);
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline52" class="outline-2">
+<h2 id="orgheadline52">Making Asynchronous Calls (4/5)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Now we have 2 Sagas, and we need to start them both at once.
+</p>
+
+<p>
+To do that, we'll add a <code>rootSaga</code> that is responsible for starting our
+other Sagas.
+</p>
+
+<p>
+In the same file <code>sagas.ts</code>, add the following code:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+// single entry point to start all Sagas at once
+export default function* rootSaga() {
+  yield [
+    helloSaga(),
+    watchIncrementAsync()
+  ];
+}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline53" class="outline-2">
+<h2 id="orgheadline53">Making Asynchronous Calls (5/5)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+This Saga yields an array with the results of calling our two sagas,
+<code>helloSaga</code> and <code>watchIncrementAsync</code>.
+</p>
+
+<p>
+Now we only have to invoke <code>sagaMiddleware.run</code> on the root Saga in <code>main.tsx</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="typescript">
+import rootSaga from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(...);
+sagaMiddleware.run(rootSaga);
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides> 
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body> 
+
+</html>
